@@ -1,0 +1,38 @@
+package com.calc;
+
+public class ArabicCalc {
+//    Arabic calculator.
+
+    String operation;
+
+    ArabicCalc(String operation) {
+        this.operation = operation;
+    }
+
+    int calculate(String operation) {
+//        Split String to Array by spaces.
+        String[] operationArray = operation.split("\\s+");
+
+//        Convert operands to Integer.
+        int firstOperand = new Integer(operationArray[0]);
+        int secondOperand = new Integer(operationArray[2]);
+
+        if (firstOperand <= 0 || firstOperand > 10 || secondOperand <= 0 || secondOperand > 10) {
+            System.out.println("Enter numbers in range from 1 to 10.");
+            return 0;
+        }
+
+        if (operationArray[1].equals("+")) {
+            return firstOperand + secondOperand;
+        } else if (operationArray[1].equals("-")) {
+            return firstOperand - secondOperand;
+        } else if (operationArray[1].equals("*")) {
+            return firstOperand * secondOperand;
+        } else  if (operationArray[1].equals("/")) {
+            return firstOperand / secondOperand;
+        } else {
+            System.out.println("Wrong operation.");
+            return 0;
+        }
+    }
+}
