@@ -2,8 +2,6 @@ package com.calc;
 
 import java.util.Scanner;
 
-import com.calc.ArabicCalc;
-
 public class Main {
 
     public static void main(String[] args) {
@@ -13,6 +11,7 @@ public class Main {
         System.out.println("Input an operation: ");
         String operation = in.nextLine();
 
+//        TODO: Check for Arabic or Roman numerals.
         ArabicCalc calc = new ArabicCalc(operation);
         System.out.println(calc.calculate(operation));
 

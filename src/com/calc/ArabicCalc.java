@@ -10,17 +10,23 @@ public class ArabicCalc {
     }
 
     int calculate(String operation) {
-//        TODO: extend regex for many spaces case
-        String[] operationArray = operation.split(" ");
+//        Split String to Array by spaces.
+        String[] operationArray = operation.split("\\s+");
 
+//        Convert operands to Integer.
         int firstOperand = new Integer(operationArray[0]);
         int secondOperand = new Integer(operationArray[2]);
-        String symbol = new String(operationArray[1]);
 
         if (operationArray[1].equals("+")) {
             return firstOperand + secondOperand;
         } else if (operationArray[1].equals("-")) {
             return firstOperand - secondOperand;
+        } else if (operationArray[1].equals("*")) {
+            return firstOperand * secondOperand;
+        } else  if (operationArray[1].equals("/")) {
+            return firstOperand / secondOperand;
+        } else {
+            System.out.println("Wrong operation.");
         }
         return 0;
     }
