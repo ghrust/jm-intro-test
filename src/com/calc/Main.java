@@ -14,9 +14,8 @@ public class Main {
         String operation = in.nextLine();
 
         ArabicCalc calc = new ArabicCalc(operation);
-        calc.displayResult();
+        System.out.println(calc.calculate(operation));
 
-        System.out.printf("Your operation: %s \n", operation);
         in.close();
     }
 }
