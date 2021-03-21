@@ -2,6 +2,7 @@ package com.calc;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 public class RomanCalc {
 //    Roman calculator.
@@ -42,8 +43,16 @@ public class RomanCalc {
         return arabNumber;
     }
 
-    void displayResult(int number) {
-        System.out.println(romanNumbers.get(number - 1));
+    void displayResultInRomanNumbers(int number) {
+        String numberInRoman = String.join("", Collections.nCopies(number, "I"))
+                .replace("IIIII", "V")
+                .replace("IIII", "IV")
+                .replace("VV", "X")
+                .replace("VIV", "IX")
+                .replace("XXXXX", "L")
+                .replace("XXXX", "XL")
+                .replace("LL", "C")
+                .replace("LXL", "XC");
+        System.out.println(numberInRoman);
     }
 }
-
