@@ -1,21 +1,25 @@
 package com.calc;
 
-public class ArabicCalc {
-//    Arabic calculator.
+import java.util.ArrayList;
+import java.util.Arrays;
 
+public class RomanCalc {
+//    Roman calculator.
+    ArrayList<String> romanNumbers = new ArrayList<String>(
+            Arrays.asList("I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"));
     String[] operation;
 
-    ArabicCalc(String[] operation) {
+    RomanCalc(String[] operation) {
         this.operation = operation;
     }
 
     int calculate(String[] operation) {
 //        Convert operands to Integer.
-        int firstOperand = new Integer(operation[0]);
-        int secondOperand = new Integer(operation[2]);
+        int firstOperand = convertToInt(operation[0]);
+        int secondOperand = convertToInt(operation[2]);
 
         if (firstOperand <= 0 || firstOperand > 10 || secondOperand <= 0 || secondOperand > 10) {
-            System.out.println("Enter numbers in range from 1 to 10.");
+            System.out.println("Enter numbers in range from I to X.");
             return 0;
         }
 
@@ -32,4 +36,14 @@ public class ArabicCalc {
             return 0;
         }
     }
+
+    int convertToInt(String romanNumber) {
+        int arabNumber = romanNumbers.indexOf(romanNumber) + 1;
+        return arabNumber;
+    }
+
+    void displayResult(int number) {
+        System.out.println(romanNumbers.get(number - 1));
+    }
 }
+
