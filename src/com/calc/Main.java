@@ -20,7 +20,7 @@ public class Main {
         } else if (contains(roman, operation[0]) && contains(roman, operation[2])) {
             RomanCalc calc = new RomanCalc(operation);
 //            System.out.println(calc.calculate(operation));
-            calc.displayResult(calc.calculate(operation));
+            calc.displayResultInRomanNumbers(calc.calculate(operation));
         } else {
             throw new NumberFormatException();
         }
