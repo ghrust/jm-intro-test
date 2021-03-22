@@ -53,6 +53,6 @@ public class RomanCalc {
                 .replace("XXXX", "XL")
                 .replace("LL", "C")
                 .replace("LXL", "XC");
-        System.out.println(numberInRoman);
+        System.out.println("[OUT]: " + numberInRoman);
     }
 }
