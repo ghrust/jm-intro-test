@@ -1,43 +1,42 @@
+/*Console application "Calculator".
+    The application read the arithmetic operations entered by the user from the console
+and output the result of their execution to the console.
+    The calculator can perform operations of addition, subtraction, multiplication and
+division with two numbers: a + b, a - b, a * b, a / b. The data is transferred in
+one line!
+    The calculator can work with both Arabic (1,2,3,4,5 ...) and Roman (I, II, III, IV, V ...) numbers.
+    The calculator accept numbers from 1 to 10 inclusively, no more.
+At the output, the numbers are not limited in size and can be any.
+    The calculator can only work with whole numbers.
+    The calculator can only work with Arabic or Roman numerals at the same time,
+when the user enters a line like 3 + II, the calculator throw an exception and stop working.
+Example:
+    [IN]: 1 + 2
+    [OUT]: 3
+
+    [IN]: V * IV
+    [OUT]: XX
+* */
 package com.calc;
 
 import java.util.Scanner;
 
 public class Main {
-    public static final String[] arab = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
-    public static final String[] roman = {"I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"};
 
     public static void main(String[] args) {
         System.out.println("Simple Calculator");
 //        Input operation.
         Scanner in = new Scanner(System.in);
-        System.out.println("Input an operation: ");
-        String[] operation = in.nextLine().split("\\s+");
-
-//        TODO: Check for Arabic or Roman numerals.
-        if (contains(arab, operation[0]) && contains(arab, operation[2])) {
-            ArabicCalc calc = new ArabicCalc(operation);
-            System.out.println(calc.calculate(operation));
-        } else if (contains(roman, operation[0]) && contains(roman, operation[2])) {
-            RomanCalc calc = new RomanCalc(operation);
-//            System.out.println(calc.calculate(operation));
-            calc.displayResultInRomanNumbers(calc.calculate(operation));
-        } else {
-            throw new NumberFormatException();
-        }
-
-
-//
-
+        System.out.print("[IN]: ");
+        String operation = in.nextLine();
         in.close();
-    }
 
-    static Boolean contains(String[] sequence, String number) {
-//        Check if number in sequence.
-        for (String item:sequence) {
-            if (item.equals(number)) {
-                return true;
-            }
-        }
-        return false;
+//        Determine type of numbers(arab or roman).
+        String calcType = Calculator.checkType(operation);
+        Calculator calc = new Calculator(calcType);
+//        Evaluate.
+        int result = calc.evaluate(operation);
+//        Display result.
+        calc.displayResult(calcType, result);
     }
 }
