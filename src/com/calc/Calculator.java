@@ -27,21 +27,20 @@ public class Calculator {
         String symbol = operationArray[1];
 
         if (firstOperand <= 0 || firstOperand > 10 || secondOperand <= 0 || secondOperand > 10) {
-            System.out.println("Enter numbers in range from I to X.");
-            return 0;
+            throw new NumberFormatException("Enter numbers in range from 1 to 10 (from I to X).");
         }
 
-//        TODO: replace with switch
-        if (symbol.equals("+")) {
-            return firstOperand + secondOperand;
-        } else if (symbol.equals("-")) {
-            return firstOperand - secondOperand;
-        } else if (symbol.equals("*")) {
-            return firstOperand * secondOperand;
-        } else  if (symbol.equals("/")) {
-            return firstOperand / secondOperand;
-        } else {
-            throw new ArithmeticException("Wrong operation symbol.");
+        switch (symbol) {
+            case "+":
+                return firstOperand + secondOperand;
+            case "-":
+                return firstOperand - secondOperand;
+            case "*":
+                return firstOperand * secondOperand;
+            case "/":
+                return firstOperand / secondOperand;
+            default:
+                throw new ArithmeticException("Wrong operation symbol.");
         }
     }
 
@@ -79,7 +78,7 @@ public class Calculator {
         } else if (arabNumbers.contains(operationArray[0]) && arabNumbers.contains(operationArray[2])) {
             calcType = "arab";
         } else {
-            throw new NumberFormatException("Numbers must be only Arabic or only Roman.");
+            throw new NumberFormatException("Wrong format.");
         }
         return calcType;
     }
