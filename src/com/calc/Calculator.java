@@ -48,7 +48,11 @@ public class Calculator {
             case "+":
                 return firstOperand + secondOperand;
             case "-":
-                return firstOperand - secondOperand;
+                int result = firstOperand - secondOperand;
+                if (calcType.equals("roman") && result <= 0) {
+                    throw new ArithmeticException("Result is less then 0.");
+                }
+                return result;
             case "*":
                 return firstOperand * secondOperand;
             case "/":
@@ -67,9 +71,6 @@ public class Calculator {
 
     void displayResult(String calcType, int result) {
 //        Display result in roman or arab numerics.
-        if (result <= 0) {
-            throw new ArithmeticException("Result is less then or equal 0.");
-        }
         if (calcType.equals("roman")) {
             String resultInRoman = String.join("", Collections.nCopies(result, "I"))
                     .replace("IIIII", "V")
