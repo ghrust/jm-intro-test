@@ -3,6 +3,8 @@ package com.calc;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Calculator {
 
@@ -13,18 +15,31 @@ public class Calculator {
     public static final ArrayList<String> arabNumbers = new ArrayList<>(
             Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10"));
 
+
     Calculator(String calcType) {
         this.calcType = calcType;
     }
 
     int evaluate(String operation) {
 //        Evaluate operation.
-        String[] operationArray = operation.split("\\s+");
+        final String romanRegex = "(X|IX|IV|V?I{0,3})\\s*([\\+\\-\\*\\/])\\s*(X|IX|IV|V?I{0,3})";
+        final String arabRegex = "(\\d+)\\s*([\\+\\-\\*\\/])\\s*(\\d+)";
+//        String[] operationArray = operation.split("\\s+");
+
+//        Select regex.
+        final String regex = calcType.equals("roman") ? romanRegex : arabRegex;
 
 //        Convert operands to Integer.
-        int firstOperand = convertToInt(calcType, operationArray[0]);
-        int secondOperand = convertToInt(calcType, operationArray[2]);
-        String symbol = operationArray[1];
+        final Pattern pattern = Pattern.compile(romanRegex, Pattern.MULTILINE);
+        final Matcher matcher = pattern.matcher(operation);
+        matcher.find();
+
+        int firstOperand = convertToInt(calcType, matcher.group(1));
+        int secondOperand = convertToInt(calcType, matcher.group(3));
+        String symbol = matcher.group(2);
+//        int firstOperand = convertToInt(calcType, operationArray[0]);
+//        int secondOperand = convertToInt(calcType, operationArray[2]);
+//        String symbol = operationArray[1];
 
         if (firstOperand <= 0 || firstOperand > 10 || secondOperand <= 0 || secondOperand > 10) {
             throw new NumberFormatException("Enter numbers in range from 1 to 10 (from I to X).");
