@@ -20,9 +20,9 @@ public class CalculatorTest {
         int expected = 5;
         Assert.assertEquals(expected, actual);
 
-        operation = "3 - 2";
+        operation = "2 - 3";
         actual = calc.evaluate(operation);
-        expected = 1;
+        expected = -1;
         Assert.assertEquals(expected, actual);
 
         operation = "2 * 3";
