@@ -9,6 +9,9 @@ import java.util.regex.Pattern;
 public class Calculator {
 
     String calcType;
+    int firstOperand;
+    int secondOperand;
+    String symbol;
 
     public static final ArrayList<String> romanNumbers = new ArrayList<>(
             Arrays.asList("I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"));
@@ -24,22 +27,18 @@ public class Calculator {
 //        Evaluate operation.
         final String romanRegex = "(X|IX|IV|V?I{0,3})\\s*([\\+\\-\\*\\/])\\s*(X|IX|IV|V?I{0,3})";
         final String arabRegex = "(\\d+)\\s*([\\+\\-\\*\\/])\\s*(\\d+)";
-//        String[] operationArray = operation.split("\\s+");
 
 //        Select regex.
         final String regex = calcType.equals("roman") ? romanRegex : arabRegex;
 
 //        Convert operands to Integer.
-        final Pattern pattern = Pattern.compile(romanRegex, Pattern.MULTILINE);
+        final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
         final Matcher matcher = pattern.matcher(operation);
-        matcher.find();
 
-        int firstOperand = convertToInt(calcType, matcher.group(1));
-        int secondOperand = convertToInt(calcType, matcher.group(3));
-        String symbol = matcher.group(2);
-//        int firstOperand = convertToInt(calcType, operationArray[0]);
-//        int secondOperand = convertToInt(calcType, operationArray[2]);
-//        String symbol = operationArray[1];
+        if (matcher.find())
+            firstOperand = convertToInt(calcType, matcher.group(1));
+            secondOperand = convertToInt(calcType, matcher.group(3));
+            symbol = matcher.group(2);
 
         if (firstOperand <= 0 || firstOperand > 10 || secondOperand <= 0 || secondOperand > 10) {
             throw new NumberFormatException("Enter numbers in range from 1 to 10 (from I to X).");
